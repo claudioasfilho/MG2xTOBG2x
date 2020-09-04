@@ -5,12 +5,12 @@ print "Current working directory %s" % retval
 
 def replaceXG2(file, device):
     devicelower = device.lower()
-    fin = open(file, "rt")
+    fin = open(file, "r+")
     data = fin.read()
-    data = data.replace('EFR32MG21A020F1024IM32', device)
-    data = data.replace('efr32mg21a020f1024im32', devicelower)
-    data = data.replace('MG21', 'BG21')
-    data = data.replace('mg21', 'bg21')
+    data = data.replace('EFR32MG22C224F512IM40', device)
+    data = data.replace('efr32mg22c224f512im40', devicelower)
+    data = data.replace('MG22', 'BG22')
+    data = data.replace('mg22', 'bg22')
     fin.close()
 
     fin = open(file, "wt")
@@ -34,20 +34,17 @@ def printDevices():
 
 
 parts = {
-    "A" : "EFR32BG21A010F512IM32",
-    "B" : "EFR32BG21A010F768IM32",
-    "C" : "EFR32BG21A010F1024IM32",
-    "D" : "EFR32BG21A020F512IM32",
-    "E" : "EFR32BG21A020F768IM32",
-    "F" : "EFR32BG21A020F1024IM32",
-    "G" : "EFR32BG21B010F512IM32",
-    "H" : "EFR32BG21B010F768IM32",
-    "I" : "EFR32BG21B010F1024IM32",
-    "J" : "EFR32BG21B020F512IM32",
-    "K" : "EFR32BG21B020F768IM32",
-    "L" : "EFR32BG21B020F1024IM32"
+    "A" : "EFR32BG22C112F352GM32",
+    "B" : "EFR32BG22C222F352GM32",
+    "C" : "EFR32BG22C222F352GM40",
+    "D" : "EFR32BG22C222F352GN32",
+    "E" : "EFR32BG22C224F512GM32",
+    "F" : "EFR32BG22C224F512GM40",
+    "G" : "EFR32BG22C224F512GN32",
+    "H" : "EFR32BG22C224F512IM32",
+    "I" : "EFR32BG22C224F512IM40"
 }
-print "EFR32MG21 to EFR32BG21 project conversion utility \n\r"
+
 printDevices()
 result = None
 while result is None:
@@ -90,3 +87,11 @@ if os.path.isdir(os.getcwd()+ "/GNU ARM v7.2.1 - Debug"):
     print "Compiler Output Directory removed"
 else:
     print "Compiler Output Directory not present"
+
+#jumps into .pdm folder and searches for MG2x strings and replace whatever files that have mentioning of MG2x
+x = os.chdir(os.getcwd()+"/.pdm")
+
+x = os.listdir(os.getcwd())
+for i in x:
+    SLSPROJ = i
+    replaceXG2(SLSPROJ, device)
