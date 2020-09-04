@@ -9,7 +9,7 @@ In order to use it, please go through the following steps:
 2) Add all the peripherals required and relevant software additions. Keep in mind if the end device has a different pin count, the GPIOs labels chosen need to be also available on that particular device.
 3) Add the python scrip to the main project folder
 4) Close the project on SSv5
-4) Open the project folder on Command line and run python MG21toBG21.py
+4) Open the project folder on Command line and run python MG2xtoBG2x.py
 5) It will give you the option to choose which is the device needed and then it will change all the files related to it.
 6) As you reopen the project on SSv5, it will be converted to a BG2x part.
 
