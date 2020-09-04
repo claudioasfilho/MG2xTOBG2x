@@ -71,13 +71,13 @@ x = os.listdir(os.getcwd())
 for i in x:
     if i.endswith(".slcp"):
         SLCP = i
-        print(SLCP)
+        #print(SLCP)
     if i.endswith(".slps"):
         SLPS = i
-        print(SLPS)
+        #print(SLPS)
     if i.endswith(".pintool"):
         PINTOOL = i
-        print(PINTOOL)
+        #print(PINTOOL)
 
 
 replaceXG2(SLCP, device)
