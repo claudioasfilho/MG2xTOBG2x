@@ -7,6 +7,8 @@ def replaceXG2(file, device):
     devicelower = device.lower()
     fin = open(file, "rt")
     data = fin.read()
+    data = data.replace('EFR32MG21A010F1024IM32', device)
+    data = data.replace('efr32mg21a010f1024im32', devicelower)
     data = data.replace('EFR32MG21A020F1024IM32', device)
     data = data.replace('efr32mg21a020f1024im32', devicelower)
     data = data.replace('MG21', 'BG21')
@@ -69,20 +71,32 @@ replaceXG2(".cproject", device)
 x = os.listdir(os.getcwd())
 
 for i in x:
-    if i.endswith(".slcp"):
-        SLCP = i
+    if i.endswith(".isc"):
+        ISC = i
+        replaceXG2(ISC, device)
         #print(SLCP)
     if i.endswith(".slps"):
         SLPS = i
+        replaceXG2(SLPS, device)
         #print(SLPS)
     if i.endswith(".pintool"):
         PINTOOL = i
+        replaceXG2(PINTOOL, device)
         #print(PINTOOL)
+    if i.endswith(".slcp"):
+        SLCP = i
+        replaceXG2(SLCP, device)
+        #print(SLCP)
+    if i.endswith(".hwconf"):
+        HWCONF = i
+        replaceXG2(HWCONF, device)
+        #print(SLCP)
 
 
-replaceXG2(SLCP, device)
-replaceXG2(SLPS, device)
-replaceXG2(PINTOOL, device)
+#replaceXG2(ISC, device)
+#replaceXG2(SLCP, device)
+#replaceXG2(SLPS, device)
+#replaceXG2(PINTOOL, device)
 
 #It checks if there is a compiler output folder and removes it
 if os.path.isdir(os.getcwd()+ "/GNU ARM v7.2.1 - Debug"):
