@@ -1,7 +1,10 @@
 import os, shutil
 from os import listdir
+from shutil import copyfile
 retval = os.getcwd()
 print "Current working directory %s" % retval
+
+legacybleLinkerScriptPATH = "/Applications/Simplicity Studio.app/Contents/Eclipse/developer/sdks/gecko_sdk_suite/v2.7/protocol/bluetooth/ble_stack/linker/GCC"
 
 def replaceXG2(file, device):
     devicelower = device.lower()
@@ -63,7 +66,7 @@ while result is None:
     else:
         print "Choice not available \n\r"
 
-
+print(devicelower)
 replaceXG2(".project", device)
 replaceXG2(".cproject", device)
 
@@ -90,6 +93,12 @@ for i in x:
     if i.endswith(".hwconf"):
         HWCONF = i
         replaceXG2(HWCONF, device)
+    if i.endswith(".ld"):
+        destinationP = os.getcwd()
+        sourceP = legacybleLinkerScriptPATH + devicelower + ".ld"
+        copyfile(sourceP, destinationP)
+        #HWCONF = i
+        #replaceXG2(HWCONF, device)
         #print(SLCP)
 
 
@@ -107,9 +116,17 @@ else:
 
 
 #jumps into .pdm folder and searches for MG2x strings and replace whatever files that have mentioning of MG2x
-x = os.chdir(os.getcwd()+"/.pdm")
+if os.path.isdir(os.getcwd()+"/.pdm"):
+    x = os.chdir(os.getcwd()+"/.pdm")
+    x = os.listdir(os.getcwd())
+    for i in x:
+        SLSPROJ = i
+        replaceXG2(SLSPROJ, device)
 
-x = os.listdir(os.getcwd())
-for i in x:
-    SLSPROJ = i
-    replaceXG2(SLSPROJ, device)
+#legacy ssv4 BLE Project includes a .settings project
+if os.path.isdir(os.getcwd()+"/.settings"):
+    x = os.chdir(os.getcwd()+"/.settings")
+    x = os.listdir(os.getcwd())
+    for i in x:
+        if i.endswith(".prefs"):
+            replaceXG2(i, device)

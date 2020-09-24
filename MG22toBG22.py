@@ -62,24 +62,32 @@ while result is None:
 replaceXG2(".project", device)
 replaceXG2(".cproject", device)
 
+
 #Searches for specific file extentions and assign them to variables
 x = os.listdir(os.getcwd())
 
 for i in x:
-    if i.endswith(".slcp"):
-        SLCP = i
+    if i.endswith(".isc"):
+        ISC = i
+        replaceXG2(ISC, device)
         #print(SLCP)
     if i.endswith(".slps"):
         SLPS = i
+        replaceXG2(SLPS, device)
         #print(SLPS)
     if i.endswith(".pintool"):
         PINTOOL = i
+        replaceXG2(PINTOOL, device)
         #print(PINTOOL)
+    if i.endswith(".slcp"):
+        SLCP = i
+        replaceXG2(SLCP, device)
+        #print(SLCP)
+    if i.endswith(".hwconf"):
+        HWCONF = i
+        replaceXG2(HWCONF, device)
+        #print(SLCP)
 
-
-replaceXG2(SLCP, device)
-replaceXG2(SLPS, device)
-replaceXG2(PINTOOL, device)
 
 #It checks if there is a compiler output folder and removes it
 if os.path.isdir(os.getcwd()+ "/GNU ARM v7.2.1 - Debug"):
